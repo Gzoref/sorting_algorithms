@@ -28,7 +28,7 @@ void bubble_sort(int *array, size_t size)
 				flag = 1;
 			}
 		}
-		if (!flag)
+		if (flag == 0)
 		{
 			break;
 		}
