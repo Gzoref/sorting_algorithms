@@ -9,7 +9,7 @@
 void bubble_sort(int *array, size_t size)
 {
 	size_t counter1, counter2;
-	int temp_swap;
+	int temp_swap, flag = 0;
 
 	/* Counts through the current step in the sort */
 	for (counter1 = 0; counter1 < size - 1; counter1++)
@@ -25,7 +25,12 @@ void bubble_sort(int *array, size_t size)
 				array[counter2 + 1] = temp_swap;
 				/* Print result */
 				print_array(array, size);
+				flag = 1;
 			}
+		}
+		if (!flag)
+		{
+			break;
 		}
 	}
 }
