@@ -1,4 +1,5 @@
 #include "sort.h"
+void swap_nodes(listint_t **a, listint_t **b);
 /**
  * insertion_sort_list - sort list in ascending order
  * @list: head of list to sort
