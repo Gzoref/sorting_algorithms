@@ -6,10 +6,17 @@
  * @size: Size of the array
  * Return: Void
  */
+
 void bubble_sort(int *array, size_t size)
 {
 	size_t counter1, counter2;
 	int temp_swap, flag = 0;
+
+	/*Check inputs*/
+	if (array == NULL || size == 0)
+	{
+		return;
+	}
 
 	/* Counts through the current step in the sort */
 	for (counter1 = 0; counter1 < size - 1; counter1++)
