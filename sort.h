@@ -30,5 +30,6 @@ void print_array(const int *array, size_t size);
 void shell_sort(int *array, size_t size);
 size_t knuth_seq(size_t size);
 void cocktail_sort_list(listint_t **list);
+void merge_sort(int *array, size_t size);
 
 #endif /* SORT_H */
