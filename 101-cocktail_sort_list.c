@@ -1,65 +1,61 @@
 #include "sort.h"
-void swap_nodes(listint_t **list, listint_t **a, listint_t **b);
+void swap_nodes(listint_t **list, listint_t **a, listint_t **b, int *s);
+void css_recurse(listint_t **l, listint_t *curr, listint_t *stop, int dir);
 /**
  * cocktail_sort_list - sort doubly-linked list with cocktail method
  * @list: list to sort
  */
 void cocktail_sort_list(listint_t **list)
 {
-	listint_t *left, *right = NULL, *curr, *temp;
-	int dir = 1; /* forward = 1; reverse = -1 */
-
 	/* cover NULL lists or list < 2 nodes */
 	if (!list || !(*list) || !(*list)->next)
 		return;
 
-	curr = left = *list;
-	while (left != right)
+	css_recurse(&(*list), *list, NULL, 1);
+}
+/**
+ * css_recurse - recursive sorting component of cocktail shaker sort
+ * @l: list being sorted (for print)
+ * @curr: current node of list
+ * @stop: last sorted node
+ * @dir: direction of parse (left-to-right: 1, or right-to-left: -1)
+ */
+void css_recurse(listint_t **l, listint_t *curr, listint_t *stop, int dir)
+{
+	int swap = 0;
+	listint_t *temp = NULL, *next_stop = NULL;
+
+	if (stop != NULL) /* prevents dereference of NULL on first reverse pass */
+		next_stop = curr;
+
+	if (dir == 1)
 	{
-		while (dir == 1)
-		{
+		do {
 			if (curr->n > curr->next->n)
 			{
-				if (curr == *list)
-					*list = curr->next;
 				temp = curr->next;
-				swap_nodes(list, &curr, &temp);
+				swap_nodes(&(*l), &curr, &temp, &swap);
 			}
 			else
 				curr = curr->next;
-
-			if (curr->next == right)
-			{
-				dir = -1;
-				right = curr;
-				curr = curr->prev;
-				break;
-			}
-		}
-		while (dir == -1)
+		} while (curr->next != stop);
+		if (swap)
+			css_recurse(&(*l), curr->prev, next_stop, -1);
+	}
+	else /* dir == -1 */
+	{
+		while (curr->prev != stop)
 		{
 			if (curr->n < curr->prev->n)
 			{
-				if (curr->prev == *list)
-					*list = curr;
-				if (curr->prev == left)
-					left = curr;
 				temp = curr->prev;
-				swap_nodes(list, &temp, &curr);
+				swap_nodes(&(*l), &temp, &curr, &swap);
 			}
 			else
 				curr = curr->prev;
-
-			if (curr == left)
-			{
-				dir = 1;
-				left = curr->next;
-				curr = curr->next->next;
-				break;
-			}
 		}
-	if (left->next == right || left->next->next == right)
-		break;
+		if (swap)
+			css_recurse(&(*l), curr->next, next_stop, 1);
 	}
 }
 /**
@@ -67,8 +63,9 @@ void cocktail_sort_list(listint_t **list)
  * @list: list (for print)
  * @a: left node
  * @b: right node
+ * @s: pointer to flag tracking swaps in calling func
  */
-void swap_nodes(listint_t **list, listint_t **a, listint_t **b)
+void swap_nodes(listint_t **list, listint_t **a, listint_t **b, int *s)
 {
 	(*a)->next = (*b)->next;
 	(*b)->prev = (*a)->prev;
@@ -78,6 +75,9 @@ void swap_nodes(listint_t **list, listint_t **a, listint_t **b)
 		(*a)->prev->next = (*b);
 	(*b)->next = (*a);
 	(*a)->prev = (*b);
+	if (*a == *list)
+		*list = *b;
 
 	print_list(*list);
+	*s = 1;
 }
