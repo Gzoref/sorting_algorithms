@@ -8,7 +8,8 @@ void swap_elem(int *arr, size_t size, int *a, int *b);
  */
 void quick_sort(int *array, size_t size)
 {
-	qs_partition(array, size, 0, size - 1);
+	if (array && size > 1)
+		qs_partition(array, size, 0, size - 1);
 }
 /**
  * qs_partition - sorts partition according to pivot
