@@ -15,11 +15,12 @@ What you should learn from this project:
 
 
 ### [1. Insertion sort](./1-number_of_lines.py)
-*Write a function that sorts a doubly linked list of integers in ascending order using the Insertion sort algorithm
+* Write a function that sorts a doubly linked list of integers in ascending order using the Insertion sort algorithm
 
 
 ### [2. Selection sort ](./2-read_lines.py)
-*Write a function that sorts an array of integers in ascending order using the Selection sort algorithm
+* Write a function that sorts an array of integers in ascending order using the Selection sort algorithm
+
 
 
 ### [3. Quick sort](./3-write_file.py)
