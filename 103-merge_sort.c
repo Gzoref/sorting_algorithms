@@ -45,14 +45,12 @@ void _merge(int *arr, size_t left, size_t mid, size_t right)
 	size_t i_l = mid, i_r = right, j = right - left;
 	int l_merged = 0, *temp = malloc(((right + 1) - left) * sizeof(int));
 
-	printf("Merging...\n"); /* print sub-arrays */
-	printf("[left]: ");
+	printf("Merging...\n[left]: "); /* print sub-arrays */
 	print_array(&arr[left], (mid + 1) - left);
 	printf("[right]: ");
 	print_array(&arr[mid + 1], (right + 1) - (mid + 1));
 
-	/* compare individual elements */
-	for (; i_l >= left && i_r >= mid + 1;)
+	for (; i_l >= left && i_r >= mid + 1;) /* compare individual elements */
 	{
 		if (arr[i_r] >= arr[i_l])
 			temp[j--] = arr[i_r--];
@@ -77,11 +75,8 @@ void _merge(int *arr, size_t left, size_t mid, size_t right)
 			break;
 		i_l--;
 	}
-
-	/* copy sorted temp back to source array */
-	_copy(&arr[left], temp, (right + 1) - left);
+	_copy(&arr[left], temp, (right + 1) - left); /* copy sorted temp back to source array */
 	free(temp);
-
 	printf("[Done]: "); /* print sorted array */
 	print_array(&arr[left], (right + 1) - left);
 }
