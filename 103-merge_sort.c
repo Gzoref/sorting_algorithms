@@ -13,7 +13,9 @@ void merge_sort(int *array, size_t size)
 
 	if (!temp) /* if malloc fails, abort */
 		return;
-	_sort(array, 0, size - 1, temp);
+	if (array && size > 1) /* check array is not NULL and is 2 elems or > */
+		_sort(array, 0, size - 1, temp);
+
 	free(temp);
 }
 /**
