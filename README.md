@@ -22,6 +22,7 @@ What you should learn from this project:
 * Write a function that sorts an array of integers in ascending order using the Selection sort algorithm
 
 
+
 ### [3. Quick sort](./3-write_file.py)
 * Write a function that sorts an array of integers in ascending order using the Quick sort algorithm
 
