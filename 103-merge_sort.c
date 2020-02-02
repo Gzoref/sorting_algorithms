@@ -1,6 +1,6 @@
 #include "sort.h"
-void _sort(int *arr, size_t left, size_t right);
-void _merge(int *arr, size_t left, size_t mid, size_t right);
+void _sort(int *arr, size_t left, size_t right, int *temp);
+void _merge(int *arr, size_t left, size_t mid, size_t right, int *temp);
 void _copy(int *arr, int *temp, size_t size);
 /**
  * merge_sort - perform a merge sort
@@ -9,15 +9,19 @@ void _copy(int *arr, int *temp, size_t size);
  */
 void merge_sort(int *array, size_t size)
 {
-	_sort(array, 0, size - 1);
+	int *temp = malloc(size * sizeof(int));
+
+	_sort(array, 0, size - 1, temp);
+	free(temp);
 }
 /**
  * _sort - break array into sub-arrays of single elements
  * @arr: array to subdivide
  * @left: left boundary of array or sub-array
  * @right: right boundary of array or sub-array
+ * @temp: buffer for _merge
  */
-void _sort(int *arr, size_t left, size_t right)
+void _sort(int *arr, size_t left, size_t right, int *temp)
 {
 	size_t mid, size = (right + 1) - left;
 
@@ -28,10 +32,10 @@ void _sort(int *arr, size_t left, size_t right)
 
 	mid = left + ((size / 2) - 1); /* calculate middle index */
 
-	_sort(arr, left, mid);
-	_sort(arr, mid + 1, right);
+	_sort(arr, left, mid, temp);
+	_sort(arr, mid + 1, right, temp);
 
-	_merge(arr, left, mid, right);
+	_merge(arr, left, mid, right, temp);
 }
 /**
  * _merge - merge sub-arrays into source array in ascending order
@@ -39,11 +43,12 @@ void _sort(int *arr, size_t left, size_t right)
  * @left: left boundary of array or sub-array
  * @mid: pivot between left and right sub-arrays (included in left)
  * @right: right boundary of array or sub-array
+ * @temp: temporary buffer
  */
-void _merge(int *arr, size_t left, size_t mid, size_t right)
+void _merge(int *arr, size_t left, size_t mid, size_t right, int *temp)
 {
 	size_t i_l = mid, i_r = right, j = right - left;
-	int l_merged = 0, *temp = malloc(((right + 1) - left) * sizeof(int));
+	int l_merged = 0;
 
 	printf("Merging...\n[left]: "); /* print sub-arrays */
 	print_array(&arr[left], (mid + 1) - left);
@@ -75,8 +80,8 @@ void _merge(int *arr, size_t left, size_t mid, size_t right)
 			break;
 		i_l--;
 	}
-	_copy(&arr[left], temp, (right + 1) - left); /* copy sorted temp back to source array */
-	free(temp);
+	/* copy sorted temp back to source array */
+	_copy(&arr[left], temp, (right + 1) - left);
 	printf("[Done]: "); /* print sorted array */
 	print_array(&arr[left], (right + 1) - left);
 }
