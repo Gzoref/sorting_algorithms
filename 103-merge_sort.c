@@ -11,6 +11,8 @@ void merge_sort(int *array, size_t size)
 {
 	int *temp = malloc(size * sizeof(int));
 
+	if (!temp) /* if malloc fails, abort */
+		return;
 	_sort(array, 0, size - 1, temp);
 	free(temp);
 }
