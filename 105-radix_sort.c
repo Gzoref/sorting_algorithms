@@ -2,7 +2,7 @@
 size_t max_digits(int *array, size_t size);
 size_t count_digits(size_t number);
 int recurrences(int *array, size_t size, size_t range, size_t ex);
-void counting_sort(int *array, size_t size, size_t ex);
+void r_counting_sort(int *array, size_t size, size_t ex);
 /**
  * radix_sort - sort array using radix method
  * @array: array to sort
@@ -20,7 +20,7 @@ void radix_sort(int *array, size_t size)
 	{
 		for (j = 0, place = 1; j < i; j++)
 			place *= 10; /* determine digit to sort */
-		counting_sort(array, size, place);
+		r_counting_sort(array, size, place);
 		print_array(array, size);
 		printf("Here!\n");
 	}
@@ -93,7 +93,7 @@ int recurrences(int *array, size_t size, size_t range, size_t ex)
  * @ex: exponent to isolate significant digit
  */
 
-void counting_sort(int *array, size_t size, size_t ex)
+void r_counting_sort(int *array, size_t size, size_t ex)
 {
 	size_t count1, count2, largest_num = 0, range = 0, temp = 0;
 	int *count_array, *sorted_array;
