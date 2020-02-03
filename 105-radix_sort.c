@@ -22,7 +22,6 @@ void radix_sort(int *array, size_t size)
 			place *= 10; /* determine digit to sort */
 		r_counting_sort(array, size, place);
 		print_array(array, size);
-		printf("Here!\n");
 	}
 }
 /**
@@ -87,7 +86,7 @@ int recurrences(int *array, size_t size, size_t range, size_t ex)
 
 
 /**
- * counting_sort - Sorts array in ascending order
+ * r_counting_sort - Sorts array in ascending order
  * @array: Array to be sorted
  * @size: Size of the array
  * @ex: exponent to isolate significant digit
@@ -131,8 +130,6 @@ void r_counting_sort(int *array, size_t size, size_t ex)
 			temp = count_array[count2 - 1] + recurrences(array, size, range, ex);
 			count_array[count2] = temp;
 		}
-		printf("After each count recurrence... ");
-		print_array(count_array, largest_num + 1);
 		range++;
 	}
 	/* Init. array to return sorted list */
@@ -147,7 +144,6 @@ void r_counting_sort(int *array, size_t size, size_t ex)
 	for (count1 = 0, count2 = size - 1; count1 < size; count1++, count2--)
 	{
 		sorted_array[count_array[((array[count2] / ex) % 10)] - 1] = array[count2];
-		print_array(sorted_array, size);
 		count_array[((array[count2] / ex) % 10)]--;
 	}
 	for (count1 = 0; count1 < size; count1++)
