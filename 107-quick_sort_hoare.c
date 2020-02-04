@@ -57,6 +57,7 @@ size_t qsh_partition(int *arr, size_t size, size_t left, size_t right)
 
 		if (l >= r)
 			break;
+
 		swap_elem(arr, size, &arr[l], &arr[r]);
 	}
 	return (l);
@@ -72,7 +73,7 @@ void swap_elem(int *arr, size_t size, int *a, int *b)
 {
 	int tmp;
 
-	if (*a != *b)
+	if (a != b)
 	{
 		tmp = *a;
 		*a = *b;
