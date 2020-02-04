@@ -56,11 +56,10 @@ size_t qsh_partition(int *arr, size_t size, size_t left, size_t right)
 		} while (arr[r] > pivot);
 
 		if (l >= r)
-			return (l);
-
+			break;
 		swap_elem(arr, size, &arr[l], &arr[r]);
 	}
-	return (0);
+	return (l);
 }
 /**
  * swap_elem - swap value of array elements
