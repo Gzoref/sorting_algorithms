@@ -18,7 +18,7 @@ void sort_deck(deck_node_t **deck)
 	next_suit = *deck;
 	while (next_suit)
 	{
-		next_suit = rank_sort(deck, next_suit, NULL, 1);
+		next_suit = rs(deck, next_suit, NULL, 1);
 	}
 }
 /**
@@ -82,11 +82,6 @@ deck_node_t *rs(deck_node_t **l, deck_node_t *curr, deck_node_t *stop, int dir)
 
 	if (stop != NULL) /* prevents dereference of NULL on first reverse pass */
 		next_stop = curr;
-	/**
-	 * printf("next_stop = %p\n",
-	 * (void *)next_stop);
-	 * printf("stop = %p\n", (void *)stop);
-	 */
 
 	if (dir == 1)
 	{
